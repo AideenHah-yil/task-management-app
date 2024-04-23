@@ -1,16 +1,17 @@
-firebase.initialApp({
-    apiKey: "AIzaSyDWpuEIA60TsjlVBx9cP6txIARzmgcqc5c",
-    authDomain: "plp-task-app-cbc7e.firebaseapp.com",
-    projectId: "plp-task-app-cbc7e",
-    storageBucket: "plp-task-app-cbc7e.appspot.com",
-    messagingSenderId: "59317947857",
-    appId: "1:59317947857:web:79c5836389b19bc12424f0"
+firebase.initializeApp({
+    apiKey: "AIzaSyB01lUsfA3z2ZfBz2qsz3wB6YN-fifGnZw",
+  authDomain: "task-management-app-f1a3a.firebaseapp.com",
+  projectId: "task-management-app-f1a3a",
+  storageBucket: "task-management-app-f1a3a.appspot.com",
+  messagingSenderId: "1079769935387",
+  appId: "1:1079769935387:web:abaf52c4c32a06dc1c52be"
 });
 
 const db = firebase.firestore();
 
+//function to add tasks
 function addTask() {
-    const taskInput = document.getElementById("taskInput");
+    const taskInput = document.getElementById("task-input");
     const task = taskInput.value.trim();
     if (task !== "") {
         db.collection("tasks").add({
@@ -18,12 +19,13 @@ function addTask() {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
         taskInput.value = "";
+        console.log("Task added.");
     }
 }
 
 function renderTasks(doc) {
     const taskList = document.getElementById("task-list");
-    const taskItem = document.getElementById("li");
+    const taskItem = document.createElement("li");
     taskItem.className = "task-item";
     taskItem.innerHTML = `
     <span>${doc.data().task}</span>
@@ -35,7 +37,7 @@ function renderTasks(doc) {
 db.collection("tasks")
     .orderBy("timestamp", "desc")
     .onSnapshot(snapshot => {
-        const changes = snapshot.doChanges();
+        const changes = snapshot.docChanges();
         changes.forEach(change => {
             if (change.type === "added") {
                 renderTasks(change.doc);
