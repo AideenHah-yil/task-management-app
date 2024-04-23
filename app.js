@@ -1,7 +1,10 @@
 firebase.initialApp({
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
+    apiKey: "AIzaSyDWpuEIA60TsjlVBx9cP6txIARzmgcqc5c",
+    authDomain: "plp-task-app-cbc7e.firebaseapp.com",
+    projectId: "plp-task-app-cbc7e",
+    storageBucket: "plp-task-app-cbc7e.appspot.com",
+    messagingSenderId: "59317947857",
+    appId: "1:59317947857:web:79c5836389b19bc12424f0"
 });
 
 const db = firebase.firestore();
