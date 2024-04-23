@@ -46,5 +46,18 @@ db.collection("tasks")
     });
 
     function deleteTask(id) {
-        db.collection("tasks").doc(id).delete();
+        db.collection("tasks").doc(id).delete()
+            .then(() => {
+                const taskItem = document.getElementById(id);
+                if (taskItem) {
+                    taskItem.remove();
+                } else {
+                    console.log("Task item not found in HTML.");
+                }
+                console.log("Task deleted successfully.");
+            })
+            .catch(error => {
+                console.error("Error removing task: ", error);
+            });
     }
+    
